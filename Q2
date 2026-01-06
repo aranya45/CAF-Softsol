@@ -1,0 +1,42 @@
+import unittest
+from company_normalizer import normalize_company_name
+
+
+class TestNormalizeCompanyName(unittest.TestCase):
+
+    def test_basic_format(self):
+        self.assertEqual(
+            normalize_company_name("CAF softsol"),
+            "CAF SoftSol India Pvt Ltd."
+        )
+
+    def test_solution_format(self):
+        self.assertEqual(
+            normalize_company_name("CAF solution"),
+            "CAF SoftSol India Pvt Ltd."
+        )
+
+    def test_long_format(self):
+        self.assertEqual(
+            normalize_company_name("CAF           softSolution  India   Pvt Limited"),
+            "CAF SoftSol India Pvt Ltd."
+        )
+
+    def test_mixed_case(self):
+        self.assertEqual(
+            normalize_company_name("cAf SoFtSoL"),
+            "CAF SoftSol India Pvt Ltd."
+        )
+
+    def test_empty_string(self):
+        self.assertIsNone(normalize_company_name(""))
+
+    def test_none_input(self):
+        self.assertIsNone(normalize_company_name(None))
+
+    def test_invalid_company(self):
+        self.assertIsNone(normalize_company_name("ABC Technologies"))
+
+
+if __name__ == "__main__":
+    unittest.main()
