@@ -1,0 +1,20 @@
+def normalize_company_name(company_name: str) -> str | None:
+    """
+    Normalizes CAF SofSol company name into a standard format.
+
+    Args:
+        company_name (str): Raw company name from Excel
+
+    Returns:
+        str | None: Normalized company name or None if input is invalid
+    """
+
+    if not company_name or not company_name.strip():
+        return None
+
+    normalized = " ".join(company_name.lower().split())
+
+    if "caf" in normalized and ("soft" in normalized or "sol" in normalized):
+        return "CAF SoftSol India Pvt Ltd."
+
+    return None
